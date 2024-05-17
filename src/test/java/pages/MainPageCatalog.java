@@ -8,7 +8,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.byText;
 
 public class MainPageCatalog {
-    SelenideElement rejectСookies = $("[aria-label='Отклонить']"),
+    private static final SelenideElement
+    rejectСookies = $("[aria-label='Отклонить']"),
     refuseСookies = $(byText("Отказаться")),
     selectСategory = $(".styles_promoList__yozMt"),
     visibilityСheck = $("h1");

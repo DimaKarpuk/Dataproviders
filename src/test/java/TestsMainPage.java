@@ -1,4 +1,5 @@
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,7 +16,8 @@ public class TestsMainPage {
     SearchStringPage searchStringPage = new SearchStringPage();
     @BeforeAll
     static void beforeAll(){
-       // Configuration.holdBrowserOpen= true;
+        Configuration.pageLoadStrategy = "eager";
+        //Configuration.holdBrowserOpen= true;
     }
     @BeforeEach void beforeEach(){
         open("https://www.21vek.by/");
@@ -26,6 +28,7 @@ public class TestsMainPage {
     void afterEach(){
         Selenide.clearBrowserLocalStorage();
     }
+
     @CsvFileSource(resources = "/testData/catalogTestsFile")
     @ParameterizedTest(name = "Тест кликабельностй категории {0} на главной странице")
     void catalogTests(String testData, String expectedValue){

@@ -6,7 +6,8 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 
 public class SearchStringPage {
-    static SelenideElement search = $("#catalogSearch"),
+    private static SelenideElement
+    search = $("#catalogSearch"),
     clearSearchInput = $(".Search_clearBtn__j9c8N"),
     checkPageShouldBeInputResult = $(".cr-category_header");
     public static void searchGoods(String value){

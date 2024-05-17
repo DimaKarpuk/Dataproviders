@@ -30,7 +30,7 @@ public class TestsMainPage {
     }
 
     @CsvFileSource(resources = "/testData/catalogTestsFile")
-    @ParameterizedTest(name = "Тест кликабельностй категории {0} на главной странице")
+    @ParameterizedTest(name = "Тест кликабельности категории {0} на главной странице")
     void catalogTests(String testData, String expectedValue){
         mainPageCatalog.categorySelect(testData);
         mainPageCatalog.checkExpectedValue(expectedValue);

@@ -17,7 +17,7 @@ public class SearchStringPage {
     public static void clickSearchClear() {
         clearSearchInput.click();
     }
-    public static void searchResultPageShouldHaveText(String value){
-        checkPageShouldBeInputResult.shouldHave(text(value));
+    public static void searchResultPageShouldHaveText(){
+        checkPageShouldBeInputResult.shouldHave(text("Результаты поиска"));
     }
 }

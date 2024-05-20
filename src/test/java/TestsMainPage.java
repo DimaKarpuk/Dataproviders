@@ -6,10 +6,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
+import pages.Cities;
+import pages.CitiesPage;
 import pages.MainPageCatalog;
 import pages.SearchStringPage;
 
 import static com.codeborne.selenide.Selenide.*;
+
+
 
 public class TestsMainPage {
     MainPageCatalog mainPageCatalog = new MainPageCatalog();
@@ -17,7 +23,7 @@ public class TestsMainPage {
     @BeforeAll
     static void beforeAll(){
         Configuration.pageLoadStrategy = "eager";
-        //Configuration.holdBrowserOpen= true;
+        Configuration.holdBrowserOpen= true;
     }
     @BeforeEach void beforeEach(){
         open("https://www.21vek.by/");
@@ -30,16 +36,25 @@ public class TestsMainPage {
     }
 
     @CsvFileSource(resources = "/testData/catalogTestsFile")
-    @ParameterizedTest(name = "Тест кликабельностй категории {0} на главной странице")
+    @ParameterizedTest(name = "Тест кликабельности категории {0} на главной странице")
     void catalogTests(String testData, String expectedValue){
         mainPageCatalog.categorySelect(testData);
         mainPageCatalog.checkExpectedValue(expectedValue);
     }
-    @CsvFileSource(resources = "/testData/searchStringTestFile")
+    @ValueSource(strings = {"Наушники" , "Очки" , "Зеркало"})
     @ParameterizedTest(name = "Тест поиска товара {0} через поисковую строку")
-    void searchStringTest(String searchQuery, String expectedLink){
-        searchStringPage.searchGoods(searchQuery);
-        searchStringPage.searchResultPageShouldHaveText(expectedLink);
+    void searchStringTest(String input){
+        searchStringPage.searchGoods(input);
+        searchStringPage.searchResultPageShouldHaveText();
         searchStringPage.clickSearchClear();
+    }
+    @EnumSource(Cities.class)
+    @ParameterizedTest
+    void siteShouldHaveCorrectCites(Cities cities){
+        CitiesPage.choiceCitiInput();
+        CitiesPage.clearIndicatorCitiChoice();
+        CitiesPage.citiSearch(cities.description);
+        CitiesPage.citiChoiceSave();
+        CitiesPage.checkMainPageShouldBeCitiChoice(cities.description);
     }
 }

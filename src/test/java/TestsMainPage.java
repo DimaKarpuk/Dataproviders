@@ -23,7 +23,7 @@ public class TestsMainPage {
     @BeforeAll
     static void beforeAll(){
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen= true;
+        //Configuration.holdBrowserOpen= true;
     }
     @BeforeEach void beforeEach(){
         open("https://www.21vek.by/");
@@ -32,7 +32,7 @@ public class TestsMainPage {
     }
     @AfterEach
     void afterEach(){
-        Selenide.clearBrowserLocalStorage();
+        Selenide.closeWebDriver();
     }
 
     @CsvFileSource(resources = "/testData/catalogTestsFile")
@@ -50,7 +50,7 @@ public class TestsMainPage {
     }
     @EnumSource(Cities.class)
     @ParameterizedTest
-    void siteShouldHaveCorrectCites(Cities cities){
+    void siteShouldHaveCorrectCitesTest(Cities cities){
         CitiesPage.choiceCitiInput();
         CitiesPage.clearIndicatorCitiChoice();
         CitiesPage.citiSearch(cities.description);

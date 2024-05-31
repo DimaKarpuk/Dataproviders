@@ -1,0 +1,18 @@
+{
+  "base": {
+    "project": "some project",
+    "environment": "some env",
+    "comment": "some comment",
+    "reportLink": "",
+    "language": "en",
+    "messenger": "telegram",
+    "allureFolder": "build/allure-report/",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "7250593112:AAH2CXZFoIe-Be-jcRQ5BU2_c0LmI_YJs6A",
+    "chat": "1193022539",
+    "replyTo": ""
+  }
+}
+//java "-DconfigFile=notifications/config.json" -jar ./notifications/allure-notifications-4.6.1.jar
